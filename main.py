@@ -29,21 +29,21 @@ correct_color = "\033[92m"
 incorrect_color = "\033[91m"
 misplaced_color = "\033[93m"
 
+WORD_LIST_PATH = "/usr/share/wordminal/word-list.txt"  # maybe should do try catch in case it is being run from pycharm instead?
+
 title = " __        __            _           _             _ \n \ \      / /__  _ __ __| |_ __ ___ (_)_ __   __ _| |\n  \ \ /\ / / _ \| '__/ _` | '_ ` _ \| | '_ \ / _` | |\n   \ V  V / (_) | | | (_| | | | | | | | | | | (_| | |\n    \_/\_/ \___/|_|  \__,_|_| |_| |_|_|_| |_|\__,_|_|"
 
-playing = True
-won = False
+def main():
+    playing = True
+    won = False
 
-try:
-
-    WORD_LIST_PATH = "/usr/share/wordminal/word-list.txt" # maybe should do try catch in case it is being run from pycharm instead?
     with open(WORD_LIST_PATH, "r") as file:
         words = file.read().splitlines()
 
     clear_terminal()
     while playing:
-        rounds = 5 # Number of rounds to be played before a game over
-        guess_list = [] # Store previous guesses
+        rounds = 5  # Number of rounds to be played before a game over
+        guess_list = []  # Store previous guesses
         current_round = 0
 
         # Choose a random word
@@ -105,6 +105,8 @@ try:
     clear_terminal()
 
 
-
-except KeyboardInterrupt:
-    clear_terminal()
+if '__name__' == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        clear_terminal()
