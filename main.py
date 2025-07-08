@@ -112,9 +112,7 @@ def main():
     clear_terminal()
 
 
-if __name__ == '__main__':
-    print("Trying")
-    try:
-        main()
-    except KeyboardInterrupt:
-        clear_terminal()
+try:
+    main()
+except KeyboardInterrupt:
+    clear_terminal()
