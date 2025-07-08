@@ -30,10 +30,11 @@ incorrect_color = "\033[91m"
 misplaced_color = "\033[93m"
 
 title = " __        __            _           _             _ \n \ \      / /__  _ __ __| |_ __ ___ (_)_ __   __ _| |\n  \ \ /\ / / _ \| '__/ _` | '_ ` _ \| | '_ \ / _` | |\n   \ V  V / (_) | | | (_| | | | | | | | | | | (_| | |\n    \_/\_/ \___/|_|  \__,_|_| |_| |_|_|_| |_|\__,_|_|"
-try:
 
-    playing = True
-    won = False
+playing = True
+won = False
+
+try:
 
     WORD_LIST_PATH = "/usr/share/wordminal/word-list.txt" # maybe should do try catch in case it is being run from pycharm instead?
     with open(WORD_LIST_PATH, "r") as file:
