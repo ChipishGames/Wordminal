@@ -22,7 +22,6 @@ def ask_play_again():
         else:
             print("Invalid input. Please enter 'y' or 'n'.")
 
-
 # Colors
 default_color = "\033[0m"
 correct_color = "\033[92m"
