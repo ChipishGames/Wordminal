@@ -3,7 +3,7 @@ import random
 import os
 
 def clear_terminal():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear') # Check nt for windows execution, otherwise assume linux
 
 def guess_prompt():
     while True:
@@ -51,32 +51,41 @@ try:
         while current_round < rounds:
             clear_terminal()
             print(title + "\n\n\n\n")
-            print(f"Remaining Guesses: {rounds - current_round}\n")
 
             # Only display previous guesses if they exist
             if len(guess_list) > 0:
                 for v in guess_list:
                     print(v)
                 print(default_color + "\n\n")
+            else:
+                print("Welcome to Wordminal! Enter a 5 letter word below to begin.")
+
+            print(f"Remaining Guesses: {rounds - current_round}\n")
 
             # Ask user for their guess
             guess = guess_prompt()
-            if len(guess) == len(chosen_word):
-                current_round += 1
-                colored_guess = ""
-                if guess == chosen_word:
-                    won = True
-                    print(f"You won in {current_round} guesses!")
-                    playing = False
-                    break
-                else:
-                    for i in range(len(chosen_word)):
-                        if chosen_word[i] == guess[i]:
-                            colored_guess += correct_color + guess[i]
-                        elif guess[i] in chosen_word:
-                            colored_guess += misplaced_color + guess[i]
-                        else:
-                            colored_guess += incorrect_color + guess[i]
+
+            # Increment round and initialize the colored guess to be stored
+            current_round += 1
+            colored_guess = ""
+            # Check if the guess matches the chosen word
+            if guess == chosen_word:
+                won = True
+                print(f"You won in {current_round} guesses!")
+                playing = False
+                break
+            # Otherwise, check if letters are in the correct space, incorrect space, or do not exist.
+            else:
+                for i in range(len(chosen_word)):
+                    # Correct
+                    if chosen_word[i] == guess[i]:
+                        colored_guess += correct_color + guess[i]
+                    # Misplaced
+                    elif guess[i] in chosen_word:
+                        colored_guess += misplaced_color + guess[i]
+                    # Incorrect
+                    else:
+                        colored_guess += incorrect_color + guess[i]
 
                 guess_list.append(colored_guess + default_color)
                 print(default_color)
@@ -89,11 +98,7 @@ try:
         else:
             print("Ran out of guesses...\n")
             print(f'The word was: "{chosen_word}"\n')
-        play_again = ask_play_again()
-        if play_again:
-            playing = True
-        else:
-            playing = False
+        playing = ask_play_again()
 
     # Clear if the game has been stopped.
     clear_terminal()
