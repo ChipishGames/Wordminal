@@ -36,7 +36,8 @@ try:
     won = False
 
     # Open the file and read all lines
-    with open("word-list.txt", "r") as file:
+    WORD_LIST_PATH = "/usr/share/wordminal/word-list.txt"
+    with open(WORD_LIST_PATH, "r") as file:
         words = file.read().splitlines()
 
     clear_terminal()
