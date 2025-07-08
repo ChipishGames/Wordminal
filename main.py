@@ -111,5 +111,4 @@ def main():
     # Clear if the game has been stopped.
     clear_terminal()
 
-
 main()
