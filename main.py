@@ -40,7 +40,7 @@ title = r"""
 """
 
 
-def __main__():
+def main():
     playing = True
     won = False
 
