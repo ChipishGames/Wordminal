@@ -112,7 +112,4 @@ def main():
     clear_terminal()
 
 
-try:
-    main()
-except KeyboardInterrupt:
-    clear_terminal()
+main()
