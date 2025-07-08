@@ -58,7 +58,7 @@ try:
                     print(v)
                 print(default_color + "\n\n")
             else:
-                print("Welcome to Wordminal! Enter a 5 letter word below to begin.")
+                print("Welcome to Wordminal! Enter a 5 letter word below to begin.\n")
 
             print(f"Remaining Guesses: {rounds - current_round}\n")
 
