@@ -31,7 +31,14 @@ misplaced_color = "\033[93m"
 
 WORD_LIST_PATH = "/usr/share/wordminal/word-list.txt"  # maybe should do try catch in case it is being run from pycharm instead?
 
-title = " __        __            _           _             _ \n \ \      / /__  _ __ __| |_ __ ___ (_)_ __   __ _| |\n  \ \ /\ / / _ \| '__/ _` | '_ ` _ \| | '_ \ / _` | |\n   \ V  V / (_) | | | (_| | | | | | | | | | | (_| | |\n    \_/\_/ \___/|_|  \__,_|_| |_| |_|_|_| |_|\__,_|_|"
+title = r"""
+ __        __            _           _             _ 
+ \ \      / /__  _ __ __| |_ __ ___ (_)_ __   __ _| |
+  \ \ /\ / / _ \| '__/ _` | '_ ` _ \| | '_ \ / _` | |
+   \ V  V / (_) | | | (_| | | | | | | | | | | (_| | |
+    \_/\_/ \___/|_|  \__,_|_| |_| |_|_|_| |_|\__,_|_|
+"""
+
 
 def main():
     playing = True
