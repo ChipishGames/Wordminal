@@ -35,16 +35,16 @@ try:
     playing = True
     won = False
 
-    # Open the file and read all lines
-    WORD_LIST_PATH = "/usr/share/wordminal/word-list.txt"
+    WORD_LIST_PATH = "/usr/share/wordminal/word-list.txt" # maybe should do try catch in case it is being run from pycharm instead?
     with open(WORD_LIST_PATH, "r") as file:
         words = file.read().splitlines()
 
     clear_terminal()
     while playing:
-        rounds = 5
-        guess_list = []
+        rounds = 5 # Number of rounds to be played before a game over
+        guess_list = [] # Store previous guesses
         current_round = 0
+
         # Choose a random word
         chosen_word = random.choice(words).upper()
 
@@ -52,11 +52,14 @@ try:
             clear_terminal()
             print(title + "\n\n\n\n")
             print(f"Remaining Guesses: {rounds - current_round}\n")
+
+            # Only display previous guesses if they exist
             if len(guess_list) > 0:
                 for v in guess_list:
                     print(v)
                 print(default_color + "\n\n")
 
+            # Ask user for their guess
             guess = guess_prompt()
             if len(guess) == len(chosen_word):
                 current_round += 1
@@ -77,6 +80,8 @@ try:
 
                 guess_list.append(colored_guess + default_color)
                 print(default_color)
+
+        # After the game has ended, display result and ask for another round.
         clear_terminal()
         print(title + "\n\n\n\n")
         if won:
@@ -89,6 +94,8 @@ try:
             playing = True
         else:
             playing = False
+
+    # Clear if the game has been stopped.
     clear_terminal()
 
 
