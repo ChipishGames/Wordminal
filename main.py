@@ -113,6 +113,7 @@ def main():
 
 
 if __name__ == '__main__':
+    print("Trying")
     try:
         main()
     except KeyboardInterrupt:
