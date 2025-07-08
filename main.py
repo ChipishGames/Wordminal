@@ -111,4 +111,8 @@ def main():
     # Clear if the game has been stopped.
     clear_terminal()
 
-main()
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        clear_terminal()
