@@ -10,15 +10,14 @@ source=("$pkgname::git+$url.git")
 md5sums=('SKIP')
 
 package() {
-    install -Dm755 "$srcdir/$pkgname/main.py" "$pkgdir/usr/bin/wordminal"
     install -Dm644 "$srcdir/$pkgname/word-list.txt" "$pkgdir/usr/share/wordminal/word-list.txt"
 
-    # Create a launcher script to ensure the word list is found
-    echo "#!/bin/sh
-WORDLIST=\"/usr/share/wordminal/word-list.txt\"
-exec python /usr/bin/wordminal \"\$@\"" > "$pkgdir/usr/bin/wordminal"
+    # Write launcher script to $pkgdir/usr/bin/wordminal
+    install -Dm755 /dev/stdin "$pkgdir/usr/bin/wordminal" << 'EOF'
+#!/bin/sh
+exec python /usr/lib/wordminal/main.py "$@"
+EOF
 
-
-    chmod +x "$pkgdir/usr/bin/wordminal.sh"
-    mv "$pkgdir/usr/bin/wordminal.sh" "$pkgdir/usr/bin/wordminal"
+    # Install actual Python script to a non-bin location
+    install -Dm755 "$srcdir/$pkgname/main.py" "$pkgdir/usr/lib/wordminal/main.py"
 }
