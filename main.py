@@ -12,9 +12,6 @@ def guess_prompt():
         if len(response) != 5: # 5 for word length
             print("Invalid Input. Please enter exactly 5 characters.")
             continue
-        if not response.lower() in words:
-            print("Invalid Input. Word is not located in word list.")
-            continue
 
         return response
 
