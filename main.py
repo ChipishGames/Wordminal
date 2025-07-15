@@ -8,10 +8,16 @@ def clear_terminal():
 def guess_prompt():
     while True:
         response = input("Guess: ").upper()
-        if len(response) == 5:
-            return response
-        else:
-            print("Invalid input. Please enter exactly 5 characters.")
+
+        if len(response) != 5: # 5 for word length
+            print("Invalid Input. Please enter exactly 5 characters.")
+            continue
+        if not response.lower() in words:
+            print("Invalid Input. Word is not located in word list.")
+            continue
+
+        return response
+
 
 def ask_play_again():
     while True:
@@ -23,13 +29,18 @@ def ask_play_again():
         else:
             print("Invalid input. Please enter 'y' or 'n'.")
 
-# Colors
+# Text Colors
 default_color = "\033[0m"
 correct_color = "\033[92m"
 incorrect_color = "\033[91m"
 misplaced_color = "\033[93m"
 
-WORD_LIST_PATH = "/usr/share/wordminal/word-list.txt"  # maybe should do try catch in case it is being run from pycharm instead?
+script_dir = os.path.dirname(os.path.abspath(__file__)) # Get directory of main file
+os.chdir(script_dir) # Set current working directory to the location of the main file
+WORD_LIST_PATH = os.path.join(os.getcwd(), "word-list.txt") # List of potential word answers
+
+with open(WORD_LIST_PATH, "r") as file:
+    words = file.read().splitlines()
 
 title = r"""
  __        __            _           _             _ 
@@ -44,23 +55,19 @@ def main():
     playing = True
     won = False
 
-    with open(WORD_LIST_PATH, "r") as file:
-        words = file.read().splitlines()
-
     clear_terminal()
     while playing:
         rounds = 5  # Number of rounds to be played before a game over
         guess_list = []  # Store previous guesses
         current_round = 0
 
-        # Choose a random word
         chosen_word = random.choice(words).upper()
 
         while current_round < rounds:
             clear_terminal()
             print(title + "\n\n\n\n")
 
-            # Only display previous guesses if they exist
+            # Only display previous guesses if the user has made a guess.
             if len(guess_list) > 0:
                 for v in guess_list:
                     print(v)
@@ -70,12 +77,11 @@ def main():
 
             print(f"Remaining Guesses: {rounds - current_round}\n")
 
-            # Ask user for their guess
             guess = guess_prompt()
 
-            # Increment round and initialize the colored guess to be stored
             current_round += 1
             colored_guess = ""
+
             # Check if the guess matches the chosen word
             if guess == chosen_word:
                 won = True
@@ -104,7 +110,7 @@ def main():
         if won:
             print(f"Won in {current_round} guesses!")
         else:
-            print("Ran out of guesses...\n")
+            print("Game over!\nRan out of guesses...\n")
             print(f'The word was: "{chosen_word}"\n')
         playing = ask_play_again()
 
