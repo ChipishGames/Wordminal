@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import random
 import os
+import sys
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear') # Check nt for windows execution, otherwise assume linux
@@ -26,6 +27,20 @@ def ask_play_again():
         else:
             print("Invalid input. Please enter 'y' or 'n'.")
 
+def find_word_list():
+    # check if in development directory
+    dev_path = os.path.join(os.path.dirname(__file__), "word-list.txt")
+    if os.path.exists(dev_path):
+        return dev_path
+
+    # check if already installed
+    system_path = "/usr/share/wordminal/word-list.txt"
+    if os.path.exists(system_path):
+        return system_path
+
+    print("Error: word-list.txt not found.")
+    sys.exit(1)
+
 # Text Colors
 default_color = "\033[0m"
 correct_color = "\033[92m"
@@ -34,7 +49,7 @@ misplaced_color = "\033[93m"
 
 script_dir = os.path.dirname(os.path.abspath(__file__)) # Get directory of main file
 os.chdir(script_dir) # Set current working directory to the location of the main file
-WORD_LIST_PATH = os.path.join(os.getcwd(), "word-list.txt") # List of potential word answers
+WORD_LIST_PATH = find_word_list()
 
 with open(WORD_LIST_PATH, "r") as file:
     words = file.read().splitlines()
